@@ -103,22 +103,23 @@ export default class PackageRequest {
   async findVersionOnRegistry(pattern: string): Promise<Manifest> {
     const {range, name} = PackageRequest.normalizePattern(pattern);
 
-    const exoticResolver = PackageRequest.getExoticResolver(range);
-    if (exoticResolver) {
-      let data = await this.findExoticVersionInfo(exoticResolver, range);
-
-      // clone data as we're manipulating it in place and this could be resolved multiple
-      // times
-      data = Object.assign({}, data);
-
-      // this is so the returned package response uses the overridden name. ie. if the
-      // package's actual name is `bar`, but it's been specified in the manifest like:
-      //   "foo": "http://foo.com/bar.tar.gz"
-      // then we use the foo name
-      data.name = name;
-
-      return data;
-    }
+    // FIXME: monolog/monolog is treated as hosted-git
+    // const exoticResolver = PackageRequest.getExoticResolver(range);
+    // if (exoticResolver) {
+    //   let data = await this.findExoticVersionInfo(exoticResolver, range);
+    //
+    //   // clone data as we're manipulating it in place and this could be resolved multiple
+    //   // times
+    //   data = Object.assign({}, data);
+    //
+    //   // this is so the returned package response uses the overridden name. ie. if the
+    //   // package's actual name is `bar`, but it's been specified in the manifest like:
+    //   //   "foo": "http://foo.com/bar.tar.gz"
+    //   // then we use the foo name
+    //   data.name = name;
+    //
+    //   return data;
+    // }
 
     const Resolver = this.getRegistryResolver();
     const resolver = new Resolver(this, name, range);
@@ -194,12 +195,13 @@ export default class PackageRequest {
    */
 
   async findVersionInfo(): Promise<Manifest> {
-    const exoticResolver = PackageRequest.getExoticResolver(this.pattern);
-    if (exoticResolver) {
-      return await this.findExoticVersionInfo(exoticResolver, this.pattern);
-    } else {
-      return await this.findVersionOnRegistry(this.pattern);
-    }
+    // FIXME: monolog/monolog is treated as hosted-git
+    // const exoticResolver = PackageRequest.getExoticResolver(this.pattern);
+    // if (exoticResolver) {
+    //   return await this.findExoticVersionInfo(exoticResolver, this.pattern);
+    // } else {
+    return await this.findVersionOnRegistry(this.pattern);
+    // }
   }
 
   /**

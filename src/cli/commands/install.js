@@ -24,6 +24,7 @@ import * as fs from '../../util/fs.js';
 import * as crypto from '../../util/crypto.js';
 import map from '../../util/map.js';
 import {sortAlpha} from '../../util/misc.js';
+import generateAutoLoader from '../../util/autoloader.js';
 
 const invariant = require('invariant');
 const semver = require('semver');
@@ -403,6 +404,8 @@ export class Install {
     }
 
     // fin!
+    // FIXME: move to something like registry.postInsllationStuff
+    await generateAutoLoader(this.resolver.patterns);
     await this.saveLockfileAndIntegrity(patterns);
     this.maybeOutputUpdate();
     this.config.requestManager.clearCache();

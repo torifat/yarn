@@ -44,6 +44,7 @@ export type PackageRemote = {
   reference: string,
   resolved?: ?string,
   hash: ?string,
+  version?: string,
 };
 
 // `dependencies` field in package info
@@ -52,9 +53,18 @@ type Dependencies = {
 };
 
 // package.json
-export type Manifest = {
+export type NpmManifest = {
   _registry?: ?RegistryNames,
+  // unique identifier to refer to this package by, if it doesn't exist in a registry then
+  // we need to use this to ensure it's unique
+  _uid: string,
+
   _loc?: ?string,
+
+  // the package reference that we pass around as a minimal way to refer to it
+  _reference?: ?PackageReference,
+
+  _remote?: ?PackageRemote,
 
   name: string,
   version: string,
@@ -75,15 +85,6 @@ export type Manifest = {
   bugs?: {
     url: string
   },
-
-  // the package reference that we pass around as a minimal way to refer to it
-  _reference?: ?PackageReference,
-
-  // unique identifier to refer to this package by, if it doesn't exist in a registry then
-  // we need to use this to ensure it's unique
-  _uid: string,
-
-  _remote?: ?PackageRemote,
 
   dist?: {
     tarball: string,
@@ -145,3 +146,49 @@ export type Dependency = {
   latest: string,
   hint: ?string
 };
+
+// composer.json - https://getcomposer.org/doc/04-schema.md
+export type PackagistManifest = {
+  _registry?: ?RegistryNames,
+  // unique identifier to refer to this package by, if it doesn't exist in a registry then
+  // we need to use this to ensure it's unique
+  _uid: string,
+
+  _loc?: ?string,
+
+  // the package reference that we pass around as a minimal way to refer to it
+  _reference?: ?PackageReference,
+
+  _remote?: ?PackageRemote,
+
+  name: string,
+  version: string,
+  description: string,
+
+  homepage?: string,
+  // license?: string | Array<string>,
+
+  repository?: {
+    type: "git",
+    url: string,
+    reference: string
+  },
+
+  dist?: {
+    type: 'zip',
+    url: string,
+    reference: string,
+    shasum: string
+  },
+
+  // Support custom type too
+  type: 'library' | 'project' | 'metapackage' | 'composer-plugin',
+  autoload: {[key: 'psr-4' | 'psr-0' | 'classmap' | 'files']: Object},
+  require?: Dependencies,
+  dependencies?: Dependencies, // Temporary
+  "require-dev"?: Dependencies,
+  suggest?: {[key: string]: string},
+  provide: {[key: string]: string}
+}
+
+export type Manifest = NpmManifest | PackagistManifest;

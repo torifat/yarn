@@ -189,6 +189,7 @@ export default class PackageLinker {
       ignoreBasenames: [
         constants.METADATA_FILENAME,
         constants.TARBALL_FILENAME,
+        constants.ZIP_FILENAME,
       ],
 
       onStart: (num: number) => {

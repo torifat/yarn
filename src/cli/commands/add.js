@@ -46,7 +46,8 @@ export class Add extends Install {
     for (const pattern of this.args) {
       requestsWithArgs.push({
         pattern,
-        registry: 'npm',
+        // registry: 'npm',
+        registry: 'packagist',
         visibility: PackageReference.USED,
         optional: false,
       });

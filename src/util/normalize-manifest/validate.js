@@ -26,7 +26,9 @@ const dependencyKeys = [
 ];
 
 function isValidName(name: string): boolean {
-  return !name.match(/[\/@\s\+%:]/) && encodeURIComponent(name) === name;
+  // FIXME: make this registry specific
+  // return !name.match(/[\/@\s\+%:]/) && encodeURIComponent(name) === name;
+  return !name.match(/[@\s\+%:]/);
 }
 
 function isValidScopedName(name: string): boolean {

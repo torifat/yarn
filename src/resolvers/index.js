@@ -2,10 +2,12 @@
 
 import RegistryNpm from './registries/npm-resolver.js';
 import RegistryYarn from './registries/yarn-resolver.js';
+import RegistryPackagist from './registries/packagist-resolver.js';
 
 export const registries = {
   npm: RegistryNpm,
   yarn: RegistryYarn,
+  packagist: RegistryPackagist,
 };
 
 //

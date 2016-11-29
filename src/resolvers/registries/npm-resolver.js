@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Manifest} from '../../types.js';
+import type {NPMManifest as Manifest} from '../../types.js';
 import type Config from '../../config.js';
 import {MessageError} from '../../errors.js';
 import RegistryResolver from './registry-resolver.js';

@@ -60,6 +60,7 @@ export const INTEGRITY_FILENAME = '.yarn-integrity';
 export const LOCKFILE_FILENAME = 'yarn.lock';
 export const METADATA_FILENAME = '.yarn-metadata.json';
 export const TARBALL_FILENAME = '.yarn-tarball.tgz';
+export const ZIP_FILENAME = '.yarn-zip.zip';
 export const CLEAN_FILENAME = '.yarnclean';
 
 export const DEFAULT_INDENT = '  ';

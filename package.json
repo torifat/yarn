@@ -40,7 +40,8 @@
     "tar": "^2.2.1",
     "tar-stream": "^1.5.2",
     "user-home": "^2.0.0",
-    "validate-npm-package-license": "^3.0.1"
+    "validate-npm-package-license": "^3.0.1",
+    "yauzl": "^2.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
